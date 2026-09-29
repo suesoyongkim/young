@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ko">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>永</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #ffffff;
+      color: #111;
+      overflow-x: hidden;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 20;
+      background: #ffffff13;
+      backdrop-filter: blur(2px);
+      border-bottom: 1px solid #1111111b;
+    }
+
+    header.active {
+        background: #ffffffec;
+        border-bottom: 1px solid #ffffff00;
+        backdrop-filter: blur(2px);
+    }
+
+    .logo {
+      font-size: 36px;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      font-family: "Noto serif KR", serif;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .about-btn {
+      position: absolute;
+      right: 64px;
+      bottom: 14px;
+      border: 0;
+      background: transparent;
+      font: inherit;
+      font-size: 16px;
+      font-style: "Times New Roman", sans-serif;
+      text-decoration: underline;
+      cursor: pointer;
+      padding: 8px 0;
+    }
+
+    main {
+      padding: 72px 60px 80px;
+      margin-top: 8px;
+    }
+
+
+    .gallery {
+        column-count: 3;
+        column-gap: 28px;
+    }
+
+    .photo-card {
+        display: inline-block;
+        width: 100%;
+        break-inside: avoid;
+        padding-top: 0;
+        margin-bottom: 24px;
+    }
+
+    .number {
+      position: static;
+      font-size: 12px;
+      margin-bottom: 2px; 
+
+    }
+
+    .photo-card img {
+        display: block;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .about-panel {
+        position: fixed;
+        top: 70px;
+        left: 0;              
+        width: 100vw;         
+        height: 100vh; 
+        color: inherit;
+        text-decoration: none;
+        font-family: "Noto sans KR", sans-serif;    
+        background: #ffffffec;
+        backdrop-filter: blur(2px);
+        z-index: 30;
+        opacity: 0;  
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        padding: 60px 240px; 
+        overflow-y: auto;
+    }
+
+    .about-panel.open {
+    opacity: 1;
+    pointer-events: auto;
+    }
+
+    .about-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 40px;
+    }
+
+    .about-text {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
+
+    .col {
+        font-size: 14.7px;
+        line-height: 1.7;
+        word-break: keep-all;    
+        overflow-wrap: normal;    
+    }
+
+    .col p {
+    margin-top: 6px;
+    }
+
+    .en {
+        font-size: 14.55px;
+        line-height: 1.5;
+    }
+
+    .credit {
+    font-size: 16px;
+    font-style: "Times New Roman", sans-serif;
+    line-height: 1.4;
+    color: #000000;
+    text-align: center;
+    padding: 40px;
+    margin-top: 160px;
+    border-top: 1px solid #1111111b;
+    }
+
+
+    @media (max-width: 768px) {
+    header {
+        height: 60px;
+  }
+
+  .logo {
+    font-size: 30px;
+    font-family: "Noto Serif KR", serif;
+  }
+
+  .about-btn {
+    color: #111;    
+    -webkit-appearance: none; 
+    right: 20px;
+    bottom: 12px;
+    font-size: 14px;
+    font-family: "Times New Roman", sans-serif;
+    text-decoration: underline;
+
+  }
+
+  main {
+    padding: 76px 16px 60px;
+    margin-top: 0;
+  }
+
+  .gallery {
+    column-count: 1;
+    column-gap: 0;
+  }
+
+  .photo-card {
+    margin-bottom: 28px;
+  }
+
+  .number {
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+
+  .about-panel {
+    top: 60px;
+    height: calc(100vh - 60px);
+    padding: 32px 20px 200px;
+  }
+
+  .about-text {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .col {
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  .credit {
+    font-size: 14px;
+    padding: 32px 20px 40px;
+    font-family: "Times New Roman", sans-serif;
+    margin-top: 80px;
+    margin-bottom: 60px;
+  }
+}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo" aria-label="Young character">永</div>
+    <button class="about-btn" id="aboutBtn">about</button>
+  </header>
+
+
+  <aside class="about-panel" id="aboutPanel" aria-hidden="true">
+    <div class="about-text">
+    <div class="col">
+        <p>
+        길고 영원하다’는 뜻을 가진 한자 영(永) 은 한국인 이름에서 남자 이름의 0.6127%, 여자 이름의 0.385%에 사용되는 한자이다. 평균 수명이 짧았던 시절, 부모들은 아이가 오래 살기를 바라는 마음을 담아 이름의 첫 글자에 이 한자를 즐겨 넣었다.​​​​​​​​​​​​​​​​
+        </p>
+        <p>
+        영(永)은 서예에서도 자주 언급되는 글자인데, 한자의 기본 필획을 익히는 데 필요한 요소가 이 한 글자 안에 들어 있다고 보아 글씨를 배울 때 기초를 설명하는 예로 자주 쓰였다. 이를 ‘영자팔법(永字八法)’이라 하며, 한 글자의 짜임과 획의 흐름을 익히는 방식으로 이해해왔다.
+        </p>
+        <p>
+        이 웹사이트는 대만 길에서 우연히 마주친 영(永)을 모아 게시하기 위해 만들어졌다. 웹은 서비스 종료나 콘텐츠 삭제 등으로 물리적인 매체보다 쉽게 사라진다. 이곳에는 프린팅된 형태로 남아 있는, ‘영원’을 뜻하는 영(永)의 사진을 모아 모든 웹사이트가 오래 남기를 바라는 마음을 담았다.
+        </p>
+        <p>
+        웹사이트는 Safari 환경에 맞추어 제작되었습니다.<br>
+        빈 공간에 커서를 누르면 사진이 랜덤으로 재배치됩니다.
+        </p>
+        <p>
+        작업은 6월까지 계속됩니다...
+        </p>
+    </div>
+
+    <div class="col en">
+        <p>
+        The character Young (永), meaning “long” or “eternal,” appears in Korean given names with a frequency of about 0.6127% for men and 0.385% for women. In times when life expectancy was relatively short, parents often chose this character as the first syllable of a name to express the wish that their child would live a long life.
+        </p>
+        <p>
+        The character 永 is also frequently referenced in calligraphy. It is considered to contain the essential elements needed to practice the basic strokes of characters, and has therefore been used as a way to explain foundational writing techniques. This is known as the “Eight Principles of Yong” (永字八法), a method through which learners understand the structure of a character and the flow of its strokes by studying this single form.
+        </p>
+        <p>
+        This project collects instances of the character Yong (永) encountered by chance on the streets of Taiwan. Unlike physical media, web-based content is easily lost through service shutdowns or deletion. By gathering images of 永—meaning “eternity”—as they appear in printed forms, it holds onto something that resists disappearance, while quietly hoping the web might do the same.
+        </p>
+        <p>
+        This website is optimized for Safari.<br>
+        Clicking on empty space will randomly rearrange the images.
+        </p>
+        <p>
+        This work will continue through June...
+        </p>
+    </div>
+</div>
+  </aside>
+
+  <main>
+<section class="gallery" id="gallery"></section>
+</main>
+
+  <script>
+    const aboutBtn = document.getElementById('aboutBtn');
+    const closeBtn = document.getElementById('closeBtn');
+    const aboutPanel = document.getElementById('aboutPanel');
+let photoCount = 0;
+
+
+
+    const gallery = document.getElementById('gallery');
+
+        for (let i = 1; i <= 17; i++) {
+        const card = document.createElement('article');
+        card.className = 'photo-card';
+
+        const number = document.createElement('div');
+        number.className = 'number';
+        number.textContent = i;
+
+        const img = document.createElement('img');
+        img.src = `${i}.jpg`;
+        img.alt = `young photo ${i}`;
+
+        card.appendChild(number);
+        card.appendChild(img);
+        gallery.appendChild(card);
+        }
+
+        document.querySelector('.logo').addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        aboutBtn.addEventListener('click', () => {
+        const isOpen = aboutPanel.classList.toggle('open');
+
+        aboutBtn.textContent = isOpen ? 'close' : 'about';
+
+        document.querySelector('header').classList.toggle('active', isOpen);
+        });
+
+        function shuffleGallery() {
+        const gallery = document.getElementById('gallery');
+        const cards = Array.from(gallery.children);
+
+        for (let i = cards.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [cards[i], cards[j]] = [cards[j], cards[i]];
+        }
+
+        cards.forEach(card => gallery.appendChild(card));
+        }
+
+        document.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768) return;
+
+        if (
+            e.target.closest('.photo-card') ||
+            e.target.closest('header') ||
+            e.target.closest('.about-panel')
+        ) return;
+
+        shuffleGallery();
+        });
+
+        
+  </script>
+</body>
+<footer class="credit">
+  work in progress......
+  <br />
+  @s.oyongkim 2026
+</footer>
+</html>
